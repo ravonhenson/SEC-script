@@ -1,10 +1,11 @@
 class Entry:
-    def __init__(self, accession_number, entity, form, is_material,
+    def __init__(self, accession_number, entity, form, is_material, summary,
                  dollar_amt, record_count, customers_affected) -> None:
         self._accession_number = accession_number
         self._entity = entity
         self._form = form
         self._is_material = is_material
+        self._summary = summary
         self._dollar_amt = dollar_amt
         self._record_count = record_count
         self._customers_affected = customers_affected
@@ -41,6 +42,15 @@ class Entry:
     @form.setter
     def form(self, form):
         self._form = form
+
+    # Getter and Setter for summary
+    @property
+    def summary(self):
+        return self._summary
+    
+    @summary.setter
+    def summary(self, summary):
+        self._summary = summary
 
     # Getter and Setter for is_material
     @property
