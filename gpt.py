@@ -30,21 +30,22 @@ class GPT:
         )
 
         return Entry
-    
-    def num_customers_affected(self, content): 
-        return self.ask("Your response should only include the number of customers affected. If it is not applicable, then say N/A", self.Question.NUMBER_OF_CUSTOMERS_AFFECTED.value, content)
-    def record_counts(self, content): 
-        return self.ask("Your response should only include the record counts. If it is not applicable, then say N/A", self.Question.RECORD_COUNTS.value, content)
-    def dollar_amounts(self, content): 
-        return self.ask("Your response should only include the dollar amount. If it is not applicable, then say N/A", self.Question.DOLLAR_AMOUNT.value, content)
+    def summary(self, content: str) -> str:
+        return self.ask(self.Context.CYBERSEC.value, self.Question.SUMMARY.value, content)
     
     def material(self, content): 
         return self.ask(self.Context.CYBERSEC.value, self.Question.MATERIAL.value, content)
     
-    def summary(self, content: str) -> str:
-        return self.ask(self.Context.CYBERSEC.value, self.Question.SUMMARY.value, content)
+    def num_customers_affected(self, content): 
+        return self.ask("Your response should only include the number of customers affected. If it is not applicable, then say N/A", self.Question.NUMBER_OF_CUSTOMERS_AFFECTED.value, content)
+    
+    def record_counts(self, content): 
+        return self.ask("Your response should only include the record count. If it is not applicable, then say N/A", self.Question.RECORD_COUNTS.value, content)
+    
+    def dollar_amounts(self, content): 
+        return self.ask("Your response should only include the dollar amount. If it is not applicable, then say N/A", self.Question.DOLLAR_AMOUNT.value, content)
 
-    def ask(self, context: str, question: str, content: str, model="gpt-4o-mini", temperature = 0) -> str:
+    def ask(self, context: str, question: str, content: str, model="gpt-4o-mini", temperature = 0.3) -> str:
         try:
             completion = self.client.chat.completions.create(
                 model=model,
